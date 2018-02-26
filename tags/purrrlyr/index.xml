@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Purrrlyr on Daniel Swan</title>
+    <link>/tags/purrrlyr/</link>
+    <description>Recent content in Purrrlyr on Daniel Swan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Daniel Swan</copyright>
+    <lastBuildDate>Mon, 26 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/purrrlyr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The difference between by_slice() and do()</title>
+      <link>/2018/02/26/the-difference-between-slice-by-and-do/</link>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/02/26/the-difference-between-slice-by-and-do/</guid>
+      <description>In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. In the context of single-case design, the model is applied to a single individual’s behaviors across time. What ended up in that calculator looked (kind of) like this:
+dat %&amp;gt;% slice_rows(clusters) %&amp;gt;%by_slice(~model_params(dat = ., .collate = &amp;quot;cols&amp;quot;)Here, clusters is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.</description>
+    </item>
+    
+  </channel>
+</rss>
