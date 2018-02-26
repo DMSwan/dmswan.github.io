@@ -7,46 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Daniel Swan</copyright>
-    <lastBuildDate>Mon, 26 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Dplyr</title>
-      <link>/tags/dplyr/</link>
-      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/dplyr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Purrrlyr</title>
-      <link>/tags/purrrlyr/</link>
-      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/purrrlyr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>/tags/r/</link>
-      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Shiny</title>
-      <link>/tags/shiny/</link>
-      <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/shiny/</guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>
