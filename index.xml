@@ -18,8 +18,8 @@
       <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/02/26/the-difference-between-slice-by-and-do/</guid>
-      <description>In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. What ended up in that calculator looked (kind of) like this:
-dat %&amp;gt;% slice_rows(clusters) %&amp;gt;%by_slice(~model_params(dat = ., .collate = &amp;quot;cols&amp;quot;) %&amp;gt;%rename(Intercept = .out1, `Intercept SE` = .out2, `Treatment Effect` = .out3,`Treatment Effect SE` = .out4, Omega = .out5, `Omega SE` = .</description>
+      <description>In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. In the context of single-case design, the model is applied to a single individual’s behaviors across time. What ended up in that calculator looked (kind of) like this:
+dat %&amp;gt;% slice_rows(clusters) %&amp;gt;%by_slice(~model_params(dat = ., .collate = &amp;quot;cols&amp;quot;)Here, clusters is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.</description>
     </item>
     
     <item>

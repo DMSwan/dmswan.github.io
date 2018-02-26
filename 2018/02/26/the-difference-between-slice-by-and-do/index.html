@@ -4,16 +4,16 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>The difference between slice_by() and do() &middot; Daniel Swan</title>
-        <meta name="description" content="In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. What ended up in that calculator looked (kind of) like this:
-dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate = &quot;cols&quot;) %&gt;%rename(Intercept = .out1, `Intercept SE` = .out2, `Treatment Effect` = .out3,`Treatment Effect SE` = .out4, Omega = .out5, `Omega SE` = .">
+        <meta name="description" content="In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. In the context of single-case design, the model is applied to a single individual’s behaviors across time. What ended up in that calculator looked (kind of) like this:
+dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate = &quot;cols&quot;)Here, clusters is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
         <meta name="generator" content="Hugo 0.36.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="The difference between slice_by() and do()">
-<meta property="og:description" content="In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. What ended up in that calculator looked (kind of) like this:
-dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate = &quot;cols&quot;) %&gt;%rename(Intercept = .out1, `Intercept SE` = .out2, `Treatment Effect` = .out3,`Treatment Effect SE` = .out4, Omega = .out5, `Omega SE` = .">
+<meta property="og:description" content="In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. In the context of single-case design, the model is applied to a single individual’s behaviors across time. What ended up in that calculator looked (kind of) like this:
+dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate = &quot;cols&quot;)Here, clusters is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/2018/02/26/the-difference-between-slice-by-and-do/">
         <link rel="stylesheet" href="/dist/styles.css">
@@ -104,17 +104,11 @@ dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate 
         <div class="post-content clearfix" itemprop="articleBody">
     
 
-    <p>In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. What ended up in that calculator looked (kind of) like this:</p>
+    <p>In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. In the context of single-case design, the model is applied to a single individual’s behaviors across time. What ended up in that calculator looked (kind of) like this:</p>
 <pre class="r"><code>dat %&gt;%  slice_rows(clusters) %&gt;%
-      by_slice(~model_params(dat = ., .collate = &quot;cols&quot;) %&gt;%
-      rename(Intercept = .out1, `Intercept SE` = .out2, `Treatment Effect` = .out3,
-             `Treatment Effect SE` = .out4, Omega = .out5, `Omega SE` = .out6,
-             Dispersion = .out7)</code></pre>
-<p>Here, <code>clusters</code> is just the user-supplied set of variables that uniquely describe an one individual’s data that I want to apply the model to. The by_slice line calls a function that applies the model and then extracts the estimates of interest, and then a <code>rename()</code> call is necessary to give the columns interpretable names.</p>
-<p>This solution works fine for this use-case and is still in the code. It’s not pretty, but it works for me. However, a few months later my adviser asked me to implement a similar batch interface for his single-case effect size calculator. There are a variety of effect sizes that have been dreamed up over the years, and James made an app that will calculate them for you, one set of data at a time. It would be nice, and save people a lot of time, if you could calculate as many or as few effect sizes as you want for as many series as you want.</p>
-<p>Well I thought about this for a while. In shiny it was easy enough to create a multi-select input that would give me a vector of function names referring to each type of effect size, and <code>do.call()</code> could get me from the name of a function to actually calling the function on data if I had it all set up right. But I couldn’t figure out how to loop across a vector of functions on a sliced dataframe. Finally it hit me that I could use the merge function like so:</p>
-<pre class="r"><code>dat &lt;- merge(dat, index, stringsAsFactors = FALSE)</code></pre>
-<p>This solution created a dataset that had a copy of each row for a given index type. So if my original dataset had 40 rows, and I picked out 3 indices that I wanted to apply to it, that function call would turn it into a 120 row dataframe. Three copies, each with a different value for <code>index</code>. Then I could add <code>index</code> to the <code>clusters</code> vector I was using to <code>slice_rows</code>, and then the first element of <code>index</code> within each sliced dataframe could be used to call the appropriate function to calculate that index. Easy! Except it turns out that <code>slice_by</code> doesn’t work the way that I expected.</p>
+      by_slice(~model_params(dat = ., .collate = &quot;cols&quot;)</code></pre>
+<p>Here, <code>clusters</code> is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.</p>
+<p>This solution works fine for this use-case and is still in the code. However, a few months later my adviser asked me to implement a similar batch interface for his single-case effect size calculator. This was almost exactly the same case, except that I also needed to be able to slice by an additional variable. That variable would correspond to an effec t size, and I would just use the first element of the variable vector to tell the function which effect size to calculate. Easy! Except it turns out that <code>slice_by</code> doesn’t work the way that I expected.</p>
 <pre class="r"><code>library(datasets)
 library(tidyverse)
 library(purrrlyr)
@@ -142,7 +136,7 @@ print(names(iris))</code></pre>
 ## 10  virginica  Sepal.Width
 ## 11  virginica Petal.Length
 ## 12  virginica  Petal.Width</code></pre>
-<p>This is a little ugly, but you can see that the variable that I sliced by <em>is not present in the dataset.</em> It took me a long time (and some break points in my code) to figure that one out. The <code>by_slice</code> function can also accept dataframes that have had <code>group_by</code> used on them, so I tried doing it that way instead and:</p>
+<p>This is a little ugly, but you can see that the variable that I sliced by <em>is not present in the sliced datasets.</em> It took me a couple of hours to figure that one out. The <code>by_slice</code> function can also accept dataframes that have had <code>group_by</code> used on them, so I tried doing it that way instead and:</p>
 <pre class="r"><code>iris %&gt;%
   group_by(Species) %&gt;%
   by_slice(names, .collate = &quot;rows&quot;)</code></pre>
@@ -184,13 +178,13 @@ print(names(iris))</code></pre>
 ## 13  virginica Petal.Length
 ## 14  virginica  Petal.Width
 ## 15  virginica      Species</code></pre>
-<p>Given that I now had my solution to that part, I only ended up having to do a little bit of extra work (including coming to terms with quosures) to get it all functioning the way that I want:</p>
-<pre class="r"><code>grouping_sym &lt;- syms(c(input$b_clusters, &quot;index&quot;))
+<p>Given that I now had my solution to that part, I only ended up having to do a little bit of extra work (including coming to terms with quosures) to get it all functioning the way that I want, and a simplified version looks like this:</p>
+<pre class="r"><code>grouping_sym &lt;- syms(c(clusters, &quot;index&quot;))
     
     dat &lt;- dat %&gt;%  
       group_by(!!!grouping_sym) %&gt;%
-      do(call_index(all_args = all_args, dat = .))</code></pre>
-<p>Here, <code>all_args</code> is just a list of arguments that different effect sizes might need, and call_index calls the appropriate index based on the first element of the <code>index</code> column. There’s some other stuff in call_index that’s necessary to get the whole thing to work, but it’s not really important for this blog post.</p>
+      do(call_index(dat = .))</code></pre>
+<p>Although the example I provided is relatively simple, it took a lot of work to figure out what was going on. I ended up placing break points inside of the <code>call_index</code> function and then inspecting the data that was being sent to it, but that was only <em>after</em> a lot of frustrated work, since the <code>call_index</code> function worked just fine when I provided it a single dataframe to estimate effect sizes on.</p>
 
 </div>
 
