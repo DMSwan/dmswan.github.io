@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>The difference between slice_by() and do() &middot; Daniel Swan</title>
+        <title>The difference between by_slice() and do() &middot; Daniel Swan</title>
         <meta name="description" content="In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. In the context of single-case design, the model is applied to a single individual’s behaviors across time. What ended up in that calculator looked (kind of) like this:
 dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate = &quot;cols&quot;)Here, clusters is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.">
         <meta name="HandheldFriendly" content="True">
@@ -11,7 +11,7 @@ dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate 
         <meta name="generator" content="Hugo 0.36.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta property="og:title" content="The difference between slice_by() and do()">
+        <meta property="og:title" content="The difference between by_slice() and do()">
 <meta property="og:description" content="In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. In the context of single-case design, the model is applied to a single individual’s behaviors across time. What ended up in that calculator looked (kind of) like this:
 dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate = &quot;cols&quot;)Here, clusters is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.">
 <meta property="og:type" content="article">
@@ -88,7 +88,7 @@ dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate 
 <div class="container">
     <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
         <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">The difference between slice_by() and do()</h1>
+    <h1 class="post-title" itemprop="name headline">The difference between by_slice() and do()</h1>
     
     <p class="post-date">
         <span>Published <time datetime="2018-02-26" itemprop="datePublished">Mon, Feb 26, 2018</time></span>
@@ -108,7 +108,7 @@ dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate 
 <pre class="r"><code>dat %&gt;%  slice_rows(clusters) %&gt;%
       by_slice(~model_params(dat = ., .collate = &quot;cols&quot;)</code></pre>
 <p>Here, <code>clusters</code> is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.</p>
-<p>This solution works fine for this use-case and is still in the code. However, a few months later my adviser asked me to implement a similar batch interface for his single-case effect size calculator. This was almost exactly the same case, except that I also needed to be able to slice by an additional variable. That variable would correspond to an effect size, and I would just use the first element of the variable vector to tell the function which effect size to calculate. Easy! Except it turns out that <code>slice_by</code> doesn’t work the way that I expected.</p>
+<p>This solution works fine for this use-case and is still in the code. However, a few months later my adviser asked me to implement a similar batch interface for his single-case effect size calculator. This was almost exactly the same case, except that I also needed to be able to slice by an additional variable. That variable would correspond to an effect size, and I would just use the first element of the variable vector to tell the function which effect size to calculate. Easy! Except it turns out that <code>by_slice</code> doesn’t work the way that I expected.</p>
 <pre class="r"><code>library(datasets)
 library(tidyverse)
 library(purrrlyr)
@@ -117,7 +117,7 @@ data(iris)
 print(names(iris))</code></pre>
 <pre><code>## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot; 
 ## [5] &quot;Species&quot;</code></pre>
-<p>So, you can see that the iris dataset has six names. Let’s see what happens if I <code>slice_by</code> species and get the names out of the datasets.</p>
+<p>So, you can see that the iris dataset has six names. Let’s see what happens if I <code>slice_by</code> species and then use <code>by_slice</code> get the names out of the datasets.</p>
 <pre class="r"><code>iris %&gt;%
   slice_rows(&quot;Species&quot;) %&gt;%
   by_slice(names, .collate = &quot;rows&quot;)</code></pre>
@@ -210,7 +210,7 @@ print(names(iris))</code></pre>
 
         
         
-            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=The%20difference%20between%20slice_by%28%29%20and%20do%28%29&url=%2f2018%2f02%2f26%2fthe-difference-between-slice-by-and-do%2f&summary="
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=The%20difference%20between%20by_slice%28%29%20and%20do%28%29&url=%2f2018%2f02%2f26%2fthe-difference-between-slice-by-and-do%2f&summary="
                onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
                <i class="fa fa-linkedin"></i>
                <span class="hidden">LinkedIn</span>
