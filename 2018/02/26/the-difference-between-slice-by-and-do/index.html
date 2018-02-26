@@ -142,7 +142,7 @@ print(names(iris))</code></pre>
 ## 10  virginica  Sepal.Width
 ## 11  virginica Petal.Length
 ## 12  virginica  Petal.Width</code></pre>
-<p>This is a little ugly, but we can see that the variable that we sliced by <em>is not present in the dataset.</em> It took me a long time (and some break points in my code) to figure that one out. The <code>by_slice</code> function can also accept dataframes that have had <code>group_by</code> used on them, so I tried doing it that way instead and:</p>
+<p>This is a little ugly, but you can see that the variable that I sliced by <em>is not present in the dataset.</em> It took me a long time (and some break points in my code) to figure that one out. The <code>by_slice</code> function can also accept dataframes that have had <code>group_by</code> used on them, so I tried doing it that way instead and:</p>
 <pre class="r"><code>iris %&gt;%
   group_by(Species) %&gt;%
   by_slice(names, .collate = &quot;rows&quot;)</code></pre>
