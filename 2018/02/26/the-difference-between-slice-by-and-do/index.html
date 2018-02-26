@@ -178,13 +178,13 @@ print(names(iris))</code></pre>
 ## 13  virginica Petal.Length
 ## 14  virginica  Petal.Width
 ## 15  virginica      Species</code></pre>
+<p>Although the example I provided is relatively simple, it took a lot of work to figure out what was going on. I ended up placing break points inside of the <code>call_index</code> function and then inspecting the data that was being sent to it, but that was only <em>after</em> a lot of frustrated work, since the <code>call_index</code> function worked just fine when I provided it a single dataframe to estimate effect sizes on.</p>
 <p>Given that I now had my solution to that part, I only ended up having to do a little bit of extra work (including coming to terms with quosures) to get it all functioning the way that I want, and a simplified version looks like this:</p>
 <pre class="r"><code>grouping_sym &lt;- syms(c(clusters, &quot;index&quot;))
     
     dat &lt;- dat %&gt;%  
       group_by(!!!grouping_sym) %&gt;%
       do(call_index(dat = .))</code></pre>
-<p>Although the example I provided is relatively simple, it took a lot of work to figure out what was going on. I ended up placing break points inside of the <code>call_index</code> function and then inspecting the data that was being sent to it, but that was only <em>after</em> a lot of frustrated work, since the <code>call_index</code> function worked just fine when I provided it a single dataframe to estimate effect sizes on.</p>
 
 </div>
 
