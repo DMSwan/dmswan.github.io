@@ -108,7 +108,11 @@ dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate 
 <pre class="r"><code>dat %&gt;%  slice_rows(clusters) %&gt;%
       by_slice(~model_params(dat = ., .collate = &quot;cols&quot;)</code></pre>
 <p>Here, <code>clusters</code> is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.</p>
+<<<<<<< HEAD
 <p>This solution works fine for this use-case and is still in the code. However, a few months later my adviser asked me to implement a similar batch interface for his single-case effect size calculator. This was almost exactly the same case, except that I also needed to be able to slice by an additional variable. That variable would correspond to an effect size, and I would just use the first element of the variable vector to tell the function which effect size to calculate. Easy! Except it turns out that <code>slice_by</code> doesn’t work the way that I expected.</p>
+=======
+<p>This solution works fine for this use-case and is still in the code. However, a few months later my adviser asked me to implement a similar batch interface for his single-case effect size calculator. This was almost exactly the same case, except that I also needed to be able to slice by an additional variable. That variable would correspond to an effec t size, and I would just use the first element of the variable vector to tell the function which effect size to calculate. Easy! Except it turns out that <code>slice_by</code> doesn’t work the way that I expected.</p>
+>>>>>>> 9a38dd0eeece5c17f71c94083ca9f8f8ae1f697c
 <pre class="r"><code>library(datasets)
 library(tidyverse)
 library(purrrlyr)
