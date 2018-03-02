@@ -28,8 +28,7 @@ dat %&amp;gt;% slice_rows(clusters) %&amp;gt;%by_slice(~model_params(dat = ., .
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/02/25/this-blog/</guid>
-      <description>Why a blog? Well, in the course of my academic career it&amp;rsquo;s become abundantly clear that I don&amp;rsquo;t particularly enjoy being the primary investigator doing the sort of methodological research I&amp;rsquo;ve been trained to do. I&amp;rsquo;m perfectly happy working under someone else as a GRA, but when the project is mine I don&amp;rsquo;t much enjoy it.
-What I DO enjoy is facilitating other people&amp;rsquo;s work and research. I love writing R code that helps other people succeed, be it code that&amp;rsquo;s necessary to get something working for a project of my adviser&amp;rsquo;s, the code to build a function or a shiny app to make statistical methods available to researchers, or code to help someone with understanding, transforming, or analyzing their data.</description>
+      <description>What I&amp;rsquo;ve learned in my time as a Ph.D. student is that I enjoy is facilitating other people&amp;rsquo;s work and research. I love writing R code that helps other people succeed, be it code that&amp;rsquo;s necessary to get something working for a project of my adviser&amp;rsquo;s, the code to build a function or a shiny app to make statistical methods available to researchers, or code to help someone with understanding, transforming, or analyzing their data.</description>
     </item>
     
     <item>
