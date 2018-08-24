@@ -15,8 +15,8 @@ dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate 
 <meta property="og:description" content="In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. In the context of single-case design, the model is applied to a single individual’s behaviors across time. What ended up in that calculator looked (kind of) like this:
 dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate = &quot;cols&quot;)Here, clusters is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="/2018/02/26/the-difference-between-slice-by-and-do/">
-        <link rel="stylesheet" href="/dist/styles.css">
+<meta property="og:url" content="https://dmswan.github.io/2018/02/26/the-difference-between-slice-by-and-do/">
+        <link rel="stylesheet" href="https://dmswan.github.io/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         
@@ -31,10 +31,10 @@ dat %&gt;% slice_rows(clusters) %&gt;%by_slice(~model_params(dat = ., .collate 
                     <div class="site-title-wrapper">
                         
                             <h1 class="site-title">
-                                <a title="Daniel Swan" href="/">Daniel Swan</a>
+                                <a title="Daniel Swan" href="https://dmswan.github.io/">Daniel Swan</a>
                             </h1>
                         
-                        <a class="button-square" href="/index.xml"><i class="fa fa-rss"></i></a>
+                        <a class="button-square" href="https://dmswan.github.io/index.xml"><i class="fa fa-rss"></i></a>
                         
                         
                         
@@ -122,62 +122,62 @@ print(names(iris))</code></pre>
   slice_rows(&quot;Species&quot;) %&gt;%
   by_slice(names, .collate = &quot;rows&quot;)</code></pre>
 <pre><code>## # tibble [12 x 2]
-##       Species         .out
-##        &lt;fctr&gt;        &lt;chr&gt;
-##  1     setosa Sepal.Length
-##  2     setosa  Sepal.Width
-##  3     setosa Petal.Length
-##  4     setosa  Petal.Width
+##    Species    .out        
+##    &lt;fct&gt;      &lt;chr&gt;       
+##  1 setosa     Sepal.Length
+##  2 setosa     Sepal.Width 
+##  3 setosa     Petal.Length
+##  4 setosa     Petal.Width 
 ##  5 versicolor Sepal.Length
-##  6 versicolor  Sepal.Width
+##  6 versicolor Sepal.Width 
 ##  7 versicolor Petal.Length
-##  8 versicolor  Petal.Width
-##  9  virginica Sepal.Length
-## 10  virginica  Sepal.Width
-## 11  virginica Petal.Length
-## 12  virginica  Petal.Width</code></pre>
+##  8 versicolor Petal.Width 
+##  9 virginica  Sepal.Length
+## 10 virginica  Sepal.Width 
+## 11 virginica  Petal.Length
+## 12 virginica  Petal.Width</code></pre>
 <p>This is a little ugly, but you can see that the variable that I sliced by <em>is not present in the sliced datasets.</em> It took me a couple of hours to figure that one out. The <code>by_slice</code> function can also accept dataframes that have had <code>group_by</code> used on them, so I tried doing it that way instead and:</p>
 <pre class="r"><code>iris %&gt;%
   group_by(Species) %&gt;%
   by_slice(names, .collate = &quot;rows&quot;)</code></pre>
 <pre><code>## # tibble [12 x 2]
-##       Species         .out
-##        &lt;fctr&gt;        &lt;chr&gt;
-##  1     setosa Sepal.Length
-##  2     setosa  Sepal.Width
-##  3     setosa Petal.Length
-##  4     setosa  Petal.Width
+##    Species    .out        
+##    &lt;fct&gt;      &lt;chr&gt;       
+##  1 setosa     Sepal.Length
+##  2 setosa     Sepal.Width 
+##  3 setosa     Petal.Length
+##  4 setosa     Petal.Width 
 ##  5 versicolor Sepal.Length
-##  6 versicolor  Sepal.Width
+##  6 versicolor Sepal.Width 
 ##  7 versicolor Petal.Length
-##  8 versicolor  Petal.Width
-##  9  virginica Sepal.Length
-## 10  virginica  Sepal.Width
-## 11  virginica Petal.Length
-## 12  virginica  Petal.Width</code></pre>
+##  8 versicolor Petal.Width 
+##  9 virginica  Sepal.Length
+## 10 virginica  Sepal.Width 
+## 11 virginica  Petal.Length
+## 12 virginica  Petal.Width</code></pre>
 <p>No dice. Same deal. At this point, I knew I had to go back to the drawing board. Since the help file in <code>by_slice</code> says that it’s doing essentially the same thing as <code>do</code> from <code>dplyr</code>, I figured I’d give that one a shot. Turns out it functions a little differently, which was perfect for my purposes!</p>
 <pre class="r"><code>print(iris %&gt;%
   group_by(Species) %&gt;%
   do(data.frame(names(.))))</code></pre>
 <pre><code>## # A tibble: 15 x 2
 ## # Groups:   Species [3]
-##       Species     names...
-##        &lt;fctr&gt;       &lt;fctr&gt;
-##  1     setosa Sepal.Length
-##  2     setosa  Sepal.Width
-##  3     setosa Petal.Length
-##  4     setosa  Petal.Width
-##  5     setosa      Species
+##    Species    names...    
+##    &lt;fct&gt;      &lt;fct&gt;       
+##  1 setosa     Sepal.Length
+##  2 setosa     Sepal.Width 
+##  3 setosa     Petal.Length
+##  4 setosa     Petal.Width 
+##  5 setosa     Species     
 ##  6 versicolor Sepal.Length
-##  7 versicolor  Sepal.Width
+##  7 versicolor Sepal.Width 
 ##  8 versicolor Petal.Length
-##  9 versicolor  Petal.Width
-## 10 versicolor      Species
-## 11  virginica Sepal.Length
-## 12  virginica  Sepal.Width
-## 13  virginica Petal.Length
-## 14  virginica  Petal.Width
-## 15  virginica      Species</code></pre>
+##  9 versicolor Petal.Width 
+## 10 versicolor Species     
+## 11 virginica  Sepal.Length
+## 12 virginica  Sepal.Width 
+## 13 virginica  Petal.Length
+## 14 virginica  Petal.Width 
+## 15 virginica  Species</code></pre>
 <p>Although the example I provided is relatively simple, it took a lot of work to figure out what was going on. I ended up placing break points inside of the <code>call_index</code> function and then inspecting the data that was being sent to it, but that was only <em>after</em> a lot of frustrated work, since the <code>call_index</code> function worked just fine when I provided it a single dataframe to estimate effect sizes on.</p>
 <p>Given that I now had my solution to that part, I only ended up having to do a little bit of extra work (including coming to terms with quosures) to get it all functioning the way that I want, and a simplified version looks like this:</p>
 <pre class="r"><code>grouping_sym &lt;- syms(c(clusters, &quot;index&quot;))
@@ -210,7 +210,7 @@ print(names(iris))</code></pre>
 
         
         
-            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=The%20difference%20between%20by_slice%28%29%20and%20do%28%29&url=%2f2018%2f02%2f26%2fthe-difference-between-slice-by-and-do%2f&summary="
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=The%20difference%20between%20by_slice%28%29%20and%20do%28%29&url=https%3a%2f%2fdmswan.github.io%2f2018%2f02%2f26%2fthe-difference-between-slice-by-and-do%2f&summary="
                onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
                <i class="fa fa-linkedin"></i>
                <span class="hidden">LinkedIn</span>
@@ -230,7 +230,7 @@ print(names(iris))</code></pre>
             <div class="container">
                 <div class="site-title-wrapper">
                     <h1 class="site-title">
-                        <a title="Daniel Swan" href="/">Daniel Swan</a>
+                        <a title="Daniel Swan" href="https://dmswan.github.io/">Daniel Swan</a>
                     </h1>
                     <a class="button-square button-jump-top js-jump-top" href="#">
                         <i class="fa fa-angle-up"></i>
@@ -247,14 +247,14 @@ print(names(iris))</code></pre>
             </div>
         </footer>
 
-        <script src="/js/jquery-1.11.3.min.js"></script>
-        <script src="/js/jquery.fitvids.js"></script>
+        <script src="https://dmswan.github.io/js/jquery-1.11.3.min.js"></script>
+        <script src="https://dmswan.github.io/js/jquery.fitvids.js"></script>
         
         
             <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         
         
-        <script src="/js/scripts.js"></script>
+        <script src="https://dmswan.github.io/js/scripts.js"></script>
     </body>
 </html>
 

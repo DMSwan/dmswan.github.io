@@ -2,59 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Daniel Swan</title>
-    <link>/</link>
+    <link>https://dmswan.github.io/</link>
     <description>Recent content on Daniel Swan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Daniel Swan</copyright>
     <lastBuildDate>Mon, 26 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dmswan.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The difference between by_slice() and do()</title>
-      <link>/2018/02/26/the-difference-between-slice-by-and-do/</link>
+      <link>https://dmswan.github.io/2018/02/26/the-difference-between-slice-by-and-do/</link>
       <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/02/26/the-difference-between-slice-by-and-do/</guid>
+      <guid>https://dmswan.github.io/2018/02/26/the-difference-between-slice-by-and-do/</guid>
       <description>In my last post I talked about the calculator I had just built that needed to apply a linear model in a batch fashion to a provided dataset. In the context of single-case design, the model is applied to a single individual’s behaviors across time. What ended up in that calculator looked (kind of) like this:
 dat %&amp;gt;% slice_rows(clusters) %&amp;gt;%by_slice(~model_params(dat = ., .collate = &amp;quot;cols&amp;quot;)Here, clusters is just the user-supplied set of variables that uniquely describe one individual’s data–say a study ID and a participant ID.</description>
     </item>
     
     <item>
       <title>This blog</title>
-      <link>/2018/02/25/this-blog/</link>
+      <link>https://dmswan.github.io/2018/02/25/this-blog/</link>
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/02/25/this-blog/</guid>
-      <description>What I&amp;rsquo;ve learned in my time as a Ph.D. student is that I enjoy is facilitating other people&amp;rsquo;s work and research. I love writing R code that helps other people succeed, be it code that&amp;rsquo;s necessary to get something working for a project of my adviser&amp;rsquo;s, the code to build a function or a shiny app to make statistical methods available to researchers, or code to help someone with understanding, transforming, or analyzing their data.</description>
+      <guid>https://dmswan.github.io/2018/02/25/this-blog/</guid>
+      <description>What I&amp;rsquo;ve learned in my time as a Ph.D. student is that I enjoy facilitating other people&amp;rsquo;s work and research. I love writing R code that helps other people succeed, be it code that&amp;rsquo;s necessary to get something working for a project of my adviser&amp;rsquo;s, the code to build a function or a shiny app to make statistical methods available to researchers, or code to help someone with understanding, transforming, or analyzing their data.</description>
     </item>
     
     <item>
       <title>gem_scd shiny app</title>
-      <link>/project/gem-scd-shiny-app/</link>
+      <link>https://dmswan.github.io/project/gem-scd-shiny-app/</link>
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/project/gem-scd-shiny-app/</guid>
+      <guid>https://dmswan.github.io/project/gem-scd-shiny-app/</guid>
       <description>I have a paper under submission with James E. Pustejovsky titled &amp;ldquo;A gradual effects model for single-case designs&amp;rdquo; (preprint here). The paper proposes a particular form of nonlinear parametric model for single-case designs that offers some flexibility in functional form and error distribution that many of the other parametric models for single-case designs don&amp;rsquo;t. However, one tricky part of it is that there&amp;rsquo;s not a straightforward way to estimate the particular form of the linear predictor we specify for our proposed model using any of the typical modeling packages in R.</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>/page/about/</link>
+      <link>https://dmswan.github.io/page/about/</link>
       <pubDate>Fri, 03 Apr 2015 02:13:50 +0000</pubDate>
       
-      <guid>/page/about/</guid>
+      <guid>https://dmswan.github.io/page/about/</guid>
       <description>About I am a doctoral candidate in UT&amp;rsquo;s Educational Psychology department. I have been a TA for statistical courses from basic to advanced, research design, as well as data analysis, simulation, and programming in R. Under the guidance of and in collaboration with Dr. James E. Pustejovsky, I have worked on research involving single-case design, the direct observation of behavior, meta-analysis, and generalized linear models. My dissertation, chaired by Dr.</description>
     </item>
     
     <item>
       <title>Contact</title>
-      <link>/page/contact/</link>
+      <link>https://dmswan.github.io/page/contact/</link>
       <pubDate>Fri, 03 Apr 2015 02:13:50 +0000</pubDate>
       
-      <guid>/page/contact/</guid>
+      <guid>https://dmswan.github.io/page/contact/</guid>
       <description>Contact E-mail: dswan@utexas.edu</description>
     </item>
     

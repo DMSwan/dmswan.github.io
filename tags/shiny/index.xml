@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shiny on Daniel Swan</title>
-    <link>/tags/shiny/</link>
+    <link>https://dmswan.github.io/tags/shiny/</link>
     <description>Recent content in Shiny on Daniel Swan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Daniel Swan</copyright>
     <lastBuildDate>Sun, 25 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/shiny/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dmswan.github.io/tags/shiny/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>gem_scd shiny app</title>
-      <link>/project/gem-scd-shiny-app/</link>
+      <link>https://dmswan.github.io/project/gem-scd-shiny-app/</link>
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/project/gem-scd-shiny-app/</guid>
+      <guid>https://dmswan.github.io/project/gem-scd-shiny-app/</guid>
       <description>I have a paper under submission with James E. Pustejovsky titled &amp;ldquo;A gradual effects model for single-case designs&amp;rdquo; (preprint here). The paper proposes a particular form of nonlinear parametric model for single-case designs that offers some flexibility in functional form and error distribution that many of the other parametric models for single-case designs don&amp;rsquo;t. However, one tricky part of it is that there&amp;rsquo;s not a straightforward way to estimate the particular form of the linear predictor we specify for our proposed model using any of the typical modeling packages in R.</description>
     </item>
     
